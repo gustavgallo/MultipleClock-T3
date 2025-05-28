@@ -38,6 +38,7 @@ deserializer des(
     .write_in(write_in),
     .reset(reset),
     .clock_100KHZ(clock_100KHZ),
+    .verifica(verifica),
     .ack_in(ack),
     .status_out(status_out),
     .data_out(entrada_queue),
@@ -47,3 +48,9 @@ deserializer des(
 
 
 endmodule
+
+always_ff @(posedge clock_100KHZ, posedge reset)begin
+    if(data_ready) begin // enquanto o deserializer ainda estiver funcionando, o queue tem que ficar parado
+        verifica <= 1; // proximo clock o queue vai começar a dar enqueue nos numeros do deserializer
+    end
+end

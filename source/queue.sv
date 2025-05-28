@@ -4,6 +4,7 @@ input logic [7:0] data_in,
 input logic enqueue_in,
 input logic dequeue_in,
 input logic reset,
+input logic verifica, // para apenas começar o programa quando o module_top mandar
 input logic clock_10KHZ,
 output logic [3:0] len_out,
 output logic [7:0] data_out,
@@ -30,6 +31,7 @@ always_ff @(posedge clock_10KHZ, posedge reset)begin
     if(reset)begin
         len_out <= 0;
         data_out <= 0;
+        verifica <= 0;
         enqueue_done <= 0;
         dequeue_done <= 0;
         fila <= 0;
@@ -39,6 +41,7 @@ always_ff @(posedge clock_10KHZ, posedge reset)begin
         case(EA)
 
             ENQUEUE:begin
+                if(verifica) begin // começar apenas quando o module "mandar"
                 if(len_out < 4'd8)begin
 
                 fila[len_out] <= data_in;
@@ -46,6 +49,7 @@ always_ff @(posedge clock_10KHZ, posedge reset)begin
                 enqueue_done <= 1;
 
 
+                end
                 end
             end
 
