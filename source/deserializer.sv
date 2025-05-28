@@ -85,7 +85,7 @@ always_ff @(posedge clock_100KHZ, posedge reset)begin
         case(EA)
 
             RECEIVE:begin
-            if (status_out) EA <= RECEIVE;;
+            if (status_out) EA <= RECEIVE;
             else EA <= WAIT;
 
             end
@@ -97,8 +97,6 @@ always_ff @(posedge clock_100KHZ, posedge reset)begin
 
 
             end
-
-
 
         endcase
 
