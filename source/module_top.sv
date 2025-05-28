@@ -4,23 +4,21 @@ module top(
 input logic reset,
 input logic clock,
 //queue
-input logic enqueue_in,
-input logic dequeue_in,
-output logic [3:0] len_out,
-output logic [7:0] data_out,
+input logic enqueue_in, //se é pra dar enqueue
+input logic dequeue_in, //se é pra dar dequeue
+output logic [3:0] len_out, // tamanho da fila
+output logic [7:0] data_out, // dado que foi retirado da fila
 //deserializer
 input logic data_in, // entrada pro deserializador
 output logic data_ready // sinal pra enviar
 output logic status_out, // 1 se pode receber dados, 0 se não pode
 input logic write_in, // como se fosse um enter
 
-
-
 );
 
-logic clock_100KHZ, clock_10KHZ;
+logic clock_100KHZ, clock_10KHZ; // clocks para os modulos
 output logic [7:0] entrada_queue, // saída de dados do modulo desearializador
-logic ack;
+logic ack; // sinal de confirmação que a fila ja tratou dos dados
 
 
 queue fila(
@@ -38,19 +36,46 @@ deserializer des(
     .write_in(write_in),
     .reset(reset),
     .clock_100KHZ(clock_100KHZ),
-    .verifica(verifica),
     .ack_in(ack),
     .status_out(status_out),
     .data_out(entrada_queue),
     .data_ready(data_ready)
 );
 
+logic [3:0] clock_counter;
 
+always_ff @(posedge clock, posedge reset) begin
+    if (reset) begin
+        clock_100KHZ <= 0;
+        clock_10KHZ <= 0;
+        clock_counter <= 0; // reseta o contador de ciclos do clock principal
+    end else begin
+        // Gera os clocks de 100KHz e 10KHz a partir do clock principal
+        clock_100KHZ <= ~clock_100KHZ; // cada ciclo atualiza
+        clock_counter <= clock_counter + 1; // incrementa o contador de ciclos
+        if (clock_counter == 4'd10) begin
+            clock_10KHZ <= ~clock_10KHZ; // atualiza a cada 10 ciclos do clock_100KHZ
+            clock_counter <= 0; // reseta o contador de ciclos
+        end
+    end
+end
+// tentando gerar o ack, não sei se vai funcionar nesse jeito, to tentando pegar as atualizações dele
+logic [3:0] len_out_prev;
+
+always_ff @(posedge clock_10KHZ or posedge reset) begin
+    if (reset) begin
+        ack <= 0;
+        len_out_prev <= 0;
+    end else begin
+        // Gera ack quando len_out aumenta (enqueue realizado)
+        if ((len_out != len_out_prev))
+            ack <= 1;
+        else
+            ack <= 0;
+        len_out_prev <= len_out;
+    end
+end
 
 endmodule
 
-always_ff @(posedge clock_100KHZ, posedge reset)begin
-    if(data_ready) begin // enquanto o deserializer ainda estiver funcionando, o queue tem que ficar parado
-        verifica <= 1; // proximo clock o queue vai começar a dar enqueue nos numeros do deserializer
-    end
-end
+// não pode adicionar mais saidas nos módulos q o professor deu, tem q usa o que tem

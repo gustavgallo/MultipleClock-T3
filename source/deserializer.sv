@@ -66,8 +66,7 @@ always_ff @(posedge clock_100KHZ, posedge reset)begin
             end
 
         endcase
-
-
+        
     end // end do else
 end // end do always
 
