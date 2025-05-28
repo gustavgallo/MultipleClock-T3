@@ -1,6 +1,6 @@
 module queue (
 
-input logic data_in,
+input logic [7:0] data_in,
 input logic enqueue_in,
 input logic dequeue_in,
 input logic reset,
@@ -63,12 +63,14 @@ always_ff @(posedge clock_10KHZ, posedge reset)begin
                 fila[7] <= 0;
                 len_out <= len_out - 1;
                 dequeue_done <= 1;
-                
+
             end
 
             end
 
             WAIT:begin
+                dequeue_done <= 0;
+                enqueue_done <= 0;
 
               
             end
@@ -99,7 +101,6 @@ always_ff @(posedge clock_10KHZ, posedge reset)begin
                 else EA <= DEQUEUE;
 
             end
-
             WAIT:begin
 
                 if(enqueue_in) EA <= ENQUEUE;
@@ -110,8 +111,6 @@ always_ff @(posedge clock_10KHZ, posedge reset)begin
         endcase
     end
 end
-
-
 
 
 endmodule

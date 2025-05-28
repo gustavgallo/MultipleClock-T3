@@ -6,7 +6,7 @@ input logic reset,
 input logic clock_100KHZ,
 input logic ack_in, // para confirmar que a fila ja tratou dos dados
 output logic status_out, // 1 se pode receber dados, 0 se não pode
-output logic [7:0] data_out, // saída de dados do modulo
+output logic [7:0] data_out, // saída de dados do modulo desearializador
 output logic data_ready // sinal pra enviar
 
 
@@ -103,10 +103,6 @@ always_ff @(posedge clock_100KHZ, posedge reset)begin
 
     end // end do else
 end // end do always
-
-
-
-
 
 
 endmodule
