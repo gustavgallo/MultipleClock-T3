@@ -3,8 +3,8 @@ vlib work
 vmap work work
 
 vlog -work work deserializer.sv
-vlog -work work module_top.sv
 vlog -work work queue.sv
+vlog -work work module_top.sv
 vlog -work work tb_module_top.sv
 
 
