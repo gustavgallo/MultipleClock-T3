@@ -33,7 +33,6 @@ always_ff @(posedge clock_10KHZ, posedge reset)begin
         
         enqueue_done <= 0;
         dequeue_done <= 0;
-        fila <= 0;
 
     end else 
     begin
