@@ -17,7 +17,7 @@ input logic write_in// como se fosse um enter
 );
 
 logic clock_100KHZ, clock_10KHZ; // clocks para os modulos
-output logic [7:0] entrada_queue; // saída de dados do modulo desearializador
+ logic [7:0] entrada_queue; // saída de dados do modulo desearializador
 logic ack; // sinal de confirmação que a fila ja tratou dos dados
 
 
