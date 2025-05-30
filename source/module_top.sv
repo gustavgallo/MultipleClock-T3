@@ -42,7 +42,7 @@ deserializer des(
     .data_ready(data_ready)
 );
 
-logic [3:0] clock_counter;
+logic [5:0] clock_counter;
 
 always_ff @(posedge clock, posedge reset) begin
     if (reset) begin
@@ -51,9 +51,11 @@ always_ff @(posedge clock, posedge reset) begin
         clock_counter <= 0; // reseta o contador de ciclos do clock principal
     end else begin
         // Gera os clocks de 100KHz e 10KHz a partir do clock principal
+        if(clock_counter == 6'd4)begin
         clock_100KHZ <= ~clock_100KHZ; // cada ciclo atualiza
+        end
         clock_counter <= clock_counter + 1; // incrementa o contador de ciclos
-        if (clock_counter == 4'd10) begin
+        if (clock_counter == 6'd49) begin
             clock_10KHZ <= ~clock_10KHZ; // atualiza a cada 10 ciclos do clock_100KHZ
             clock_counter <= 0; // reseta o contador de ciclos
         end

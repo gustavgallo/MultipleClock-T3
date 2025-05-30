@@ -3,16 +3,16 @@
 module tb_module_top;
 
 //geral
-logic reset;
-logic clock;
+logic reset = 0;
+logic clock = 0;
 //queue
-logic enqueue_in; 
-logic dequeue_in; 
+logic enqueue_in; //escreve
+logic dequeue_in; //escreve
 logic [3:0] len_out; 
 logic [7:0] data_out; 
 //deserializer
-logic data_in; 
-logic data_ready; 
+logic data_in; // escreve
+logic data_ready; // escreve
 logic status_out; 
 logic write_in;
 
@@ -31,14 +31,19 @@ top main(
 .write_in(write_in)
 
 );
+initial begin
 
-  // Geração de clock
-  always #1 clock = ~clock;
+reset <= #50 ~reset; #50; 
+
+end
+always #500 clock <= ~clock; // clock de 1 MHz
+   
+#500;
+
+data_in <= 1; #600;
+data_in <= 0; #600;
 
 
-   initial begin
-    reset = 1; #2;
-    reset = 0; 
-   end
+
 
    endmodule
