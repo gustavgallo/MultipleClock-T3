@@ -10,9 +10,9 @@ output logic [3:0] len_out, // tamanho da fila
 output logic [7:0] data_out, // dado que foi retirado da fila
 //deserializer
 input logic data_in, // entrada pro deserializador
-output logic data_ready // sinal pra enviar
+output logic data_ready, // sinal pra enviar
 output logic status_out, // 1 se pode receber dados, 0 se não pode
-input logic write_in, // como se fosse um enter
+input logic write_in// como se fosse um enter
 
 );
 
