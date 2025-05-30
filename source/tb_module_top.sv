@@ -3,7 +3,7 @@
 module tb_module_top;
 
 //geral
-logic reset = 0;
+logic reset = 1;
 logic clock = 0;
 //queue
 logic enqueue_in; //escreve
@@ -33,8 +33,7 @@ top main(
 );
 initial begin
 
-reset <= #50 ~reset; #50; 
-reset <= #50 ~reset; #50; 
+reset <= #50 ~reset; #50;  
 
 end
 always begin #500; clock <= ~clock; // clock de 1 MHz
