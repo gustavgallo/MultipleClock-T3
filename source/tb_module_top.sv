@@ -36,8 +36,8 @@ initial begin
 reset <= #50 ~reset; #50; 
 
 end
-always #500 clock <= ~clock; // clock de 1 MHz
-   
+always begin #500; clock <= ~clock; // clock de 1 MHz
+end
 #500;
 
 data_in <= 1; #600;
