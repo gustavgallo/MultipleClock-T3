@@ -34,7 +34,7 @@ always_ff @(posedge clock_100KHZ, posedge reset)begin
         status_out <= 0; // está em condição de receber bits
         data_ready <= 0; // não ta pronto
         data_out <= 0; //zera a saída
-        counter <= 0; // reseta o contador
+        counter <= 1; // reseta o contador
 
 
     end
@@ -47,9 +47,9 @@ always_ff @(posedge clock_100KHZ, posedge reset)begin
                     else begin
                         if (status_out) begin
                             if (write_in) begin // se recebeu o write_in, significa que é pra receber o dado
-                                data_out <= {data_out[6:0], data_in}; // shift left e coloca o bit recebido no final
+                                data_out <= {data_out[7:0], data_in}; // shift left e coloca o bit recebido no final
                                 counter <= counter + 1;
-                                if (counter == 3'd6) begin // se recebeu todos os bits escreve no data_ready
+                                if (counter == 3'd8) begin // se recebeu todos os bits es5creve no data_ready
                                     data_ready <= 1;
                                     status_out <= 0; // nao pode receber mais dados
                             

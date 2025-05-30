@@ -6,7 +6,7 @@ input logic dequeue_in,
 input logic reset,
 input logic clock_10KHZ,
 output logic [3:0] len_out,
-output logic [7:0] data_out,
+output logic [7:0] data_out
 
 );
 
