@@ -34,6 +34,7 @@ top main(
 initial begin
 
 reset <= #50 ~reset; #50; 
+reset <= #50 ~reset; #50; 
 
 end
 always begin #500; clock <= ~clock; // clock de 1 MHz
