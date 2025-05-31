@@ -48,6 +48,7 @@ always_ff @(posedge clock_100KHZ, posedge reset)begin
                         if (status_out) begin
                             if (write_in) begin // se recebeu o write_in, significa que é pra receber o dado
                                 data_out <= {data_out[7:0], data_in}; // shift left e coloca o bit recebido no final
+                                write_in <= 0; // quando confirmou e veio pra cá, o confirma tem que zerar.
                                 counter <= counter + 1;
                                 if (counter == 3'd8) begin // se recebeu todos os bits es5creve no data_ready
                                     data_ready <= 1;

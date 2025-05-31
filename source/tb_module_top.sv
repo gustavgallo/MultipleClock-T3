@@ -41,14 +41,23 @@ module tb_module_top;
    end
    initial begin 
       #500;
+  
       data_in <= 0; #600;
+      write_in <= 1;
       data_in <= 1; #600;
+      write_in <= 1;
       data_in <= 0; #600;
+      write_in <= 1;
       data_in <= 1; #600;
+      write_in <= 1;
       data_in <= 0; #600;
+      write_in <= 1;
       data_in <= 0; #600;
+      write_in <= 1;
       data_in <= 1; #600;
+      write_in <= 1;
       data_in <= 0; #600; // o código "01010010" significa: R
+   
 
       enqueue_in <= 1; #600;
       dequeue_in <= 1; #600;
