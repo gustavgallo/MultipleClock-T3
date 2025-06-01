@@ -2,8 +2,8 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 add wave -noupdate -label reset /tb_module_top/reset
 add wave -noupdate -color Red -label {clock 1mhz} /tb_module_top/clock
-add wave -noupdate -color {Spring Green} -label {clk 100khz} -radix binary -radixshowbase 0 /tb_module_top/main/clock_100KHZ
-add wave -noupdate -color Yellow -label {clock 10khz} -radix binary -radixshowbase 0 /tb_module_top/main/clock_10KHZ
+add wave -noupdate -color {Spring Green} -label {clk 100khz} -radix binary -radixshowbase 0 /tb_module_top/main/clock_100KHz
+add wave -noupdate -color Yellow -label {clock 10khz} -radix binary -radixshowbase 0 /tb_module_top/main/clock_10KHz
 add wave -noupdate label dequeue_in /tb_module_top/dequeue_in
 add wave -noupdate -label data_out -radix binary /tb_module_top/data_out
 add wave -noupdate -label len_out -radix decimal /tb_module_top/len_out
