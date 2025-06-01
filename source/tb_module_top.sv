@@ -37,12 +37,12 @@ integer index;
 logic [7:0] send_data = 8'b10011001;
 
 initial begin
-    rst = 1;
+    reset = 1;
     data_in = 0;
     write_in = 0;
 
     #2500;
-    rst = 0;
+    reset = 0;
     #4000;
 
     forever begin
