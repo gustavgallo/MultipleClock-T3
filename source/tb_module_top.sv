@@ -61,6 +61,8 @@ initial begin
             #10000;
         end
          // testando escrever 2 words na fila
+         #100000;
+
          for(index2 = 0; index2 < 8; index2 = index2 + 1) begin
 
             data_in = send_data2[index2];

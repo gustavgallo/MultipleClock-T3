@@ -66,6 +66,7 @@ always_ff @(posedge clock_100KHZ, posedge reset)begin
                     data_ready <= 0; // nao esta pronto
                     counter <= 0; // reseta o contador
                     data_out <= 0; // reseta a saída
+                    start <= 1; // volta a startar o processo
                 end
 
             end
