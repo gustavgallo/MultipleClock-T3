@@ -40,26 +40,35 @@ deserializer des(
     .data_out(entrada_queue),
     .data_ready(enable_queue)
 );
+// counter para cada um dos clocks
+logic [3:0] counter_100KHz = 0; 
+logic [6:0] counter_10KHz = 0; 
 
-logic [5:0] clock_counter;
+  always_ff @(posedge clock_1MHz) begin
+        if (reset) begin
+            counter_100KHz <= 0;
+            counter_10KHz  <= 0;
+            clock_100KHz   <= 0;
+            clock_10KHz    <= 0;
+        end else begin
+            if (counter_100KHz == 4'd4) begin // conta de 0 a 4, então, quando for 4, muda o sinal do clk
+                clock_100KHz <= ~clock_100KHz; // muda sinal
+                counter_100KHz <= 0;         // zera o count
+            end else begin
+                counter_100KHz <= counter_100KHz + 1; // count++
+            end
 
-always_ff @(posedge clock, posedge reset) begin
-    if (reset) begin
-        clock_100KHZ <= 0;
-        clock_10KHZ <= 0;
-        clock_counter <= 0; // reseta o contador de ciclos do clock principal
-    end else begin
-        // Gera os clocks de 100KHz e 10KHz a partir do clock principal
-        if(clock_counter == 6'd4)begin
-        clock_100KHZ <= ~clock_100KHZ; // cada ciclo atualiza
-        end
-        clock_counter <= clock_counter + 1; // incrementa o contador de ciclos
-        if (clock_counter == 6'd49) begin
-            clock_10KHZ <= ~clock_10KHZ; // atualiza a cada 10 ciclos do clock_100KHZ
-            clock_counter <= 0; // reseta o contador de ciclos
+            if (counter_10KHz == 7'd49) begin  // conta de 0 a 49, então, quando for 49, muda o clk
+                clock_10KHz <= ~clock_10KHz; // muda sinal
+                counter_10KHz <= 0;        // zera o count
+            end else begin
+                counter_10KHz <= counter_10KHz + 1; // count++
+            end
         end
     end
-end
+
+
+
 // tentando gerar o ack, não sei se vai funcionar nesse jeito, to tentando pegar as atualizações dele
 logic [3:0] len_out_prev;
 
