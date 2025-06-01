@@ -39,34 +39,35 @@ always_ff @(posedge clock_10KHZ, posedge reset)begin
         case(EA)
 
             ENQUEUE:begin
-                
-                if(len_out < 4'd8)begin
+                if(enqueue_done == 0)begin
+                    if(len_out < 4'd8)begin
 
-                fila[len_out] <= data_in;
-                if(len_out != 4'd7) len_out <= len_out + 1;
-                enqueue_done <= 1;
+                    fila[len_out] <= data_in;
+                    if(len_out != 4'd8) len_out <= len_out + 1;
+                    enqueue_done <= 1;
 
-
+                    end
                 end
-                
             end
 
             DEQUEUE:begin
-            if(len_out > 0) begin
+                if(dequeue_done == 0) begin
+                    if(len_out > 0) begin
 
-                data_out <= fila[0];
-                fila[0] <= fila[1];
-                fila[1] <= fila[2];
-                fila[2] <= fila[3];
-                fila[3] <= fila[4];
-                fila[4] <= fila[5];
-                fila[5] <= fila[6];
-                fila[6] <= fila[7];
-                fila[7] <= 0;
-                len_out <= len_out - 1;
-                dequeue_done <= 1;
+                        data_out <= fila[0];
+                        fila[0] <= fila[1];
+                        fila[1] <= fila[2];
+                        fila[2] <= fila[3];
+                        fila[3] <= fila[4];
+                        fila[4] <= fila[5];
+                        fila[5] <= fila[6];
+                        fila[6] <= fila[7];
+                        fila[7] <= 0;
+                        len_out <= len_out - 1;
+                        dequeue_done <= 1;
 
-            end
+                    end
+                end    
 
             end
 
