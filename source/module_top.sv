@@ -4,20 +4,19 @@ module top(
 input logic reset,
 input logic clock,
 //queue
-input logic enqueue_in, //se é pra dar enqueue
 input logic dequeue_in, //se é pra dar dequeue
 output logic [3:0] len_out, // tamanho da fila
 output logic [7:0] data_out, // dado que foi retirado da fila
 //deserializer
 input logic data_in, // entrada pro deserializador
-output logic data_ready, // sinal pra enviar
-output logic status_out, // 1 se pode receber dados, 0 se não pode
+output logic status_out, // 1 se ta recebendo dados, 0 se não
 input logic write_in// como se fosse um enter
 
 );
 
 logic clock_100KHZ, clock_10KHZ; // clocks para os modulos
 logic [7:0] entrada_queue; // saída de dados do modulo desearializador
+logic enable_queue; // sinal de habilitação para a fila
 logic ack; // sinal de confirmação que a fila ja tratou dos dados
 
 
@@ -25,7 +24,7 @@ queue fila(
     .clock_10KHZ(clock_10KHZ),
     .reset(reset),
     .data_in(entrada_queue),
-    .enqueue_in(enqueue_in),
+    .enqueue_in(enable_queue),
     .dequeue_in(dequeue_in),
     .len_out(len_out),
     .data_out(data_out)
@@ -39,7 +38,7 @@ deserializer des(
     .ack_in(ack),
     .status_out(status_out),
     .data_out(entrada_queue),
-    .data_ready(data_ready)
+    .data_ready(enable_queue)
 );
 
 logic [5:0] clock_counter;

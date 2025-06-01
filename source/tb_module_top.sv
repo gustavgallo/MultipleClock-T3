@@ -6,14 +6,13 @@ module tb_module_top;
    logic reset = 0;
    logic clock = 0;
    //queue
-   logic enqueue_in; //escreve
+   
    logic dequeue_in; //escreve
    logic [3:0] len_out; 
    logic [7:0] data_out; 
    //deserializer
-   logic data_in; // escreve
-   logic data_ready; // escreve
-   logic status_out; 
+   logic data_in; // envia dados
+   logic status; 
    logic write_in;
 
    // Instância do DUT (Device Under Test)
@@ -21,49 +20,43 @@ module tb_module_top;
 
       .reset(reset),
       .clock(clock),
-      .enqueue_in(enqueue_in),
       .dequeue_in(dequeue_in),
       .len_out(len_out),
       .data_out(data_out),
       .data_in(data_in),
-      .data_ready(data_ready),
-      .status_out(status_out),
+      .status_out(status),
       .write_in(write_in)
 
    );
-   initial begin
-      reset <= 1;
-      #100;
-      reset <= 0;
-   end
+   
    always begin
        #500; clock <= ~clock; // clock de 1 MHz
    end
-   initial begin 
-      #500;
-  
-      data_in <= 0; #600;
-      write_in <= 1;
-      data_in <= 1; #600;
-      write_in <= 1;
-      data_in <= 0; #600;
-      write_in <= 1;
-      data_in <= 1; #600;
-      write_in <= 1;
-      data_in <= 0; #600;
-      write_in <= 1;
-      data_in <= 0; #600;
-      write_in <= 1;
-      data_in <= 1; #600;
-      write_in <= 1;
-      data_in <= 0; #600; // o código "01010010" significa: R
-   
 
-      enqueue_in <= 1; #600;
-      dequeue_in <= 1; #600;
+integer index;
+logic [7:0] send_data = 8'b10011001;
 
-      #5000;
-      $finish;
-   end
+initial begin
+    rst = 1;
+    data_in = 0;
+    write_in = 0;
+
+    #2500;
+    rst = 0;
+    #4000;
+
+    forever begin
+        @(posedge status);
+        #10000;
+        for(index = 0; index < 8; index = index + 1) begin
+
+            data_in = send_data[index];
+            write_in = 1;
+            #10000;
+            write_in = 0;
+            #10000;
+        end
+    end
+end    
 
  endmodule
