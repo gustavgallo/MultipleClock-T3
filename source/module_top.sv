@@ -40,11 +40,10 @@ deserializer des(
     .data_out(entrada_queue),
     .data_ready(enable_queue)
 );
-// counter para cada um dos clocks
-logic [3:0] counter_100KHz = 0; 
+// counter para cada um dos clockslogic [3:0] counter_100KHz = 0; 
 logic [6:0] counter_10KHz = 0; 
 
-  always_ff @(posedge clock_1MHz) begin
+  always_ff @(posedge clock) begin
         if (reset) begin
             counter_100KHz <= 0;
             counter_10KHz  <= 0;
@@ -72,7 +71,7 @@ logic [6:0] counter_10KHz = 0;
 // tentando gerar o ack, não sei se vai funcionar nesse jeito, to tentando pegar as atualizações dele
 logic [3:0] len_out_prev;
 
-always_ff @(posedge clock_10KHZ or posedge reset) begin
+always_ff @(posedge clock_10KHz or posedge reset) begin
     if (reset) begin
         ack <= 0;
         len_out_prev <= 0;
