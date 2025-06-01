@@ -14,14 +14,14 @@ input logic write_in// como se fosse um enter
 
 );
 
-logic clock_100KHZ, clock_10KHZ; // clocks para os modulos
+logic clock_100KHz, clock_10KHz; // clocks para os modulos
 logic [7:0] entrada_queue; // saída de dados do modulo desearializador
 logic enable_queue; // sinal de habilitação para a fila
 logic ack; // sinal de confirmação que a fila ja tratou dos dados
 
 
 queue fila(
-    .clock_10KHZ(clock_10KHZ),
+    .clock_10KHZ(clock_10KHz),
     .reset(reset),
     .data_in(entrada_queue),
     .enqueue_in(enable_queue),
@@ -34,7 +34,7 @@ deserializer des(
     .data_in(data_in),
     .write_in(write_in),
     .reset(reset),
-    .clock_100KHZ(clock_100KHZ),
+    .clock_100KHZ(clock_100KHz),
     .ack_in(ack),
     .status_out(status_out),
     .data_out(entrada_queue),
