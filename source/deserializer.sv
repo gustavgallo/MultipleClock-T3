@@ -47,7 +47,7 @@ always_ff @(posedge clock_100KHZ, posedge reset)begin
                     else begin
                         if (status_out) begin
                             if (write_in) begin // se recebeu o write_in, significa que é pra receber o dado
-                                data_out <= {data_out[7:0], data_in}; // shift left e coloca o bit recebido no final
+                                data_out <= {data_out[6:0], data_in}; // shift left e coloca o bit recebido no final
                                 counter <= counter + 1;
                                 if (counter == 3'd8) begin // se recebeu todos os bits es5creve no data_ready
                                     data_ready <= 1;
@@ -64,7 +64,7 @@ always_ff @(posedge clock_100KHZ, posedge reset)begin
                 if (ack_in) begin // se recebeu o ack_in, significa que a fila ja tratou dos dados
                     status_out <= 0; // pode receber mais dados
                     data_ready <= 0; // nao esta pronto
-                    counter <= 0; // reseta o contador
+                    counter <= 1; // reseta o contador
                     data_out <= 0; // reseta a saída
                     start <= 1; // volta a startar o processo
                 end
