@@ -63,7 +63,7 @@ initial begin
          #100000;
 
          dequeue_in = 1; // ranca fora 1
-         #100000;
+         #200000;
          dequeue_in = 0; // desiste de rancar fora
          #600000;
       $finish; // finaliza simulação
