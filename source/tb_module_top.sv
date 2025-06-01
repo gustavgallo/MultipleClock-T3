@@ -34,16 +34,15 @@ module tb_module_top;
    end
 
 integer index;
-integer index2;
 
 logic [7:0] send_data = 8'b10011001;
-logic [7:0] send_data2 = 8'b11110000;
 
 
 initial begin
-    reset = 1;
-    data_in = 0;
-    write_in = 0;
+   reset = 1;
+   data_in = 0;
+   write_in = 0;
+   dequeue_in = 0;
 
     #2500;
     reset = 0;
@@ -63,17 +62,8 @@ initial begin
          // testando escrever 2 words na fila
          #100000;
 
-         for(index2 = 0; index2 < 8; index2 = index2 + 1) begin
-
-            data_in = send_data2[index2];
-            write_in = 1;
-            #10000;
-            write_in = 0;
-            #10000;
-        end
-
          dequeue_in = 1; // ranca fora 1
-         #10000;
+         #100000;
          dequeue_in = 0; // desiste de rancar fora
          #10000;
 
