@@ -17,7 +17,7 @@ input logic write_in// como se fosse um enter
 logic clock_100KHz, clock_10KHz; // clocks para os modulos
 logic [7:0] entrada_queue; // saída de dados do modulo desearializador
 logic enable_queue; // sinal de habilitação para a fila
-logic ack; // sinal de confirmação que a fila ja tratou dos dados
+logic ack = 0; // sinal de confirmação que a fila ja tratou dos dados
 
 
 queue fila(
@@ -40,8 +40,10 @@ deserializer des(
     .data_out(entrada_queue),
     .data_ready(enable_queue)
 );
-// counter para cada um dos clockslogic [3:0] counter_100KHz = 0; 
+// counter para cada um dos clocks
+logic [3:0] counter_100KHz = 0; 
 logic [6:0] counter_10KHz = 0; 
+
 
   always_ff @(posedge clock) begin
         if (reset) begin
