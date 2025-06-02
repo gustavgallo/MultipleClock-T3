@@ -1,4 +1,8 @@
 # 🕒 MultipleClock-T3
+## 👥 Autores
+Gustavo Gallo - @gustavgallo
+
+Rodrigo Machado - @GncRodrigo
 
 ## 📌 Descrição
 
@@ -21,3 +25,7 @@ Clone o repositório:
 
 ```bash
 git clone https://github.com/gustavgallo/MultipleClock-T3.git
+```
+após isso use o comando:
+```bash
+vsim -do sim.do
