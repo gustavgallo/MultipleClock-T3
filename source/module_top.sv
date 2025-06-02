@@ -51,7 +51,7 @@ logic [6:0] counter_10KHz = 0;
 
 
   always_ff @(posedge clock) begin
-        if (reset) begin
+        if (reset) begin // zera tudo necessário
             counter_100KHz <= 0;
             counter_10KHz  <= 0;
             clock_100KHz   <= 0;

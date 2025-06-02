@@ -2,7 +2,7 @@ module deserializer (
 
 input logic data_in, // recebe o valor de 1 bit
 input logic write_in, // como se fosse um enter
-input logic reset, 
+input logic reset,
 input logic clock_100KHZ,
 input logic ack_in, // para confirmar que a fila ja tratou dos dados
 output logic status_out, // 0 se não ta recebendo, 1 se ta recebendo
@@ -15,9 +15,9 @@ output logic [1:0] EA_des
 //vamo simplificar as coisas, ou ta recebendo ou ta esperando e ja era
 typedef enum logic [1:0] { 
     
-    RECEIVE,
+    RECEIVE, // irá entrar em RECEIVE quando houver numeros no data_in e o write_in estar alto
 
-    WAIT
+    WAIT // fica em espera enquanto o queue está executando
 
 } state_t;
 

@@ -1,12 +1,12 @@
 module queue (
 
-input logic [7:0] data_in,
-input logic enqueue_in,
-input logic dequeue_in,
+input logic [7:0] data_in, // onde ira receber os numeros
+input logic enqueue_in, // quando for alto, o estado será enqueue
+input logic dequeue_in, // quando for alto, o estado será dequeue
 input logic reset,
 input logic clock_10KHZ,
-output logic [3:0] len_out,
-output logic [7:0] data_out,
+output logic [3:0] len_out, // onde é armazenado as sequencias de bits
+output logic [7:0] data_out, // onde o enqueue vai armazenar 
 output logic [1:0] EA_queue
 );
 
@@ -15,11 +15,11 @@ logic [1:0] enqueue_done, dequeue_done;
 
 typedef enum logic [1:0] { 
     
-    ENQUEUE,
+    ENQUEUE, // estado que irá armazenar no data_out
 
-    DEQUEUE,
+    DEQUEUE, // estado que ira retirar do data_out 
 
-    WAIT
+    WAIT // estado que vai esperar o deserializer executar
 
 } state_t;
 
