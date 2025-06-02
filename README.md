@@ -11,9 +11,9 @@ Este projeto visa a implementação e simulação de um sistema digital com múl
 
 ## 🧩 Estrutura do Projeto
 
-- **Deserializer**: recebe dados via `data_in`. Sempre que `write_in` estiver ativo, o bit é armazenado em `data_out` após formar um conjunto de 8 bits.
+- **Deserializer**: recebe dados via `data_in`. Sempre que `write_in` estiver ativo, o bit é armazenado em `data_out` podendo formar um conjunto de 8 bits.
 - **Queue**: armazena sequências de 8 bits em `data_out`, com capacidade para guardar até 4 entradas em `len_out`. Possui operações de **enqueue** (inserção) e **dequeue** (remoção).
-- **Module_top**: conecta o `Deserializer` à `Queue`, enviando automaticamente `data_out` à fila quando o byte estiver completo.
+- **Module_top**: conecta o `Deserializer` à `Queue`, enviando automaticamente `data_out` à fila quando o `data_out` do `Deserializer` estiver completo.
 
 ## 🛠️ Tecnologias Utilizadas
 
