@@ -64,7 +64,6 @@ initial begin
 
     // Palavra 2
     send_data = 8'b11110000;
-    @(posedge status);
     #10000;
     for(index = 0; index < 8; index = index + 1) begin
         data_in = send_data[index];
@@ -76,7 +75,6 @@ initial begin
 
     // Palavra 3
     send_data = 8'b00001111;
-    @(posedge status);
     #10000;
     for(index = 0; index < 8; index = index + 1) begin
         data_in = send_data[index];
@@ -88,7 +86,6 @@ initial begin
 
     // Palavra 4
     send_data = 8'b10101010;
-    @(posedge status);
     #10000;
     for(index = 0; index < 8; index = index + 1) begin
         data_in = send_data[index];
