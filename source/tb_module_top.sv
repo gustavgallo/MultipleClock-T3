@@ -34,7 +34,7 @@ module tb_module_top;
    end
 
 integer index;
-
+integer word;
 logic [7:0] send_data = 8'b10011001;
 
 
@@ -49,7 +49,7 @@ initial begin
     #4000;
 
     // Envia 4 palavras diferentes
-    for (int word = 0; word < 4; word++) begin
+    for (word = 0; word < 4; word = word + 1) begin
         send_data = 8'b00000000 + word; // Exemplo: incrementa a cada palavra
 
         @(posedge status);
