@@ -48,24 +48,27 @@ initial begin
     reset = 0;
     #4000;
 
-    forever begin
+    // Envia 4 palavras diferentes
+    for (int word = 0; word < 4; word++) begin
+        send_data = 8'b00000000 + word; // Exemplo: incrementa a cada palavra
+
         @(posedge status);
         #10000;
         for(index = 0; index < 8; index = index + 1) begin
-
             data_in = send_data[index];
             write_in = 1;
             #10000;
             write_in = 0;
             #10000;
         end 
-         #300000;
-         dequeue_in = 1; // ranca fora 1
-         #200000;
-         dequeue_in = 0; // desiste de rancar fora
-         #600000;
-      $finish; // finaliza simulação
+        #300000;
     end
+
+    dequeue_in = 1; // ranca fora 1
+    #200000;
+    dequeue_in = 0; // desiste de rancar fora
+    #600000;
+    $finish; // finaliza simulação
 end    
 
  endmodule
