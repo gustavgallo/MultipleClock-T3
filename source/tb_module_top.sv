@@ -60,7 +60,7 @@ initial begin
                 write_in = 0;
                 #10000;
             end 
-            #30000;
+            #300000;
             send_data = send_data + 1;
         end    
          #300000;
