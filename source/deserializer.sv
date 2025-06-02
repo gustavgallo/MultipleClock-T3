@@ -7,8 +7,8 @@ input logic clock_100KHZ,
 input logic ack_in, // para confirmar que a fila ja tratou dos dados
 output logic status_out, // 0 se não ta recebendo, 1 se ta recebendo
 output logic [7:0] data_out, // saída de dados do modulo desearializador
-output logic data_ready // sinal pra enviar
-
+output logic data_ready, // sinal pra enviar
+output logic [1:0] EA_des
 
 );
 
@@ -22,7 +22,7 @@ typedef enum logic [1:0] {
 } state_t;
 
 state_t EA;
-
+EA = EA_des;
 
 logic [2:0] counter; // contador para saber quantos bits foram recebidos
 logic start = 1;

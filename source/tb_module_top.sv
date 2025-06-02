@@ -58,10 +58,8 @@ initial begin
             #10000;
             write_in = 0;
             #10000;
-        end
-         // testando escrever 2 words na fila
+        end 
          #100000;
-
          dequeue_in = 1; // ranca fora 1
          #200000;
          dequeue_in = 0; // desiste de rancar fora

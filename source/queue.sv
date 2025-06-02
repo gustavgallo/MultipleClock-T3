@@ -6,8 +6,8 @@ input logic dequeue_in,
 input logic reset,
 input logic clock_10KHZ,
 output logic [3:0] len_out,
-output logic [7:0] data_out
-
+output logic [7:0] data_out,
+output logic [1:0] EA_queue
 );
 
 logic [7:0] fila [7:0];
@@ -24,6 +24,7 @@ typedef enum logic [1:0] {
 } state_t;
 
 state_t EA;
+EA_queue = EA;
 
 //bloco de dados para tratar do enqueue e dequeue
 always_ff @(posedge clock_10KHZ, posedge reset)begin
