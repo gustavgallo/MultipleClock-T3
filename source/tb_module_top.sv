@@ -52,7 +52,7 @@ initial begin
         @(posedge status);
         #10000;
         for(words = 0; words < 4; words = words + 1)begin
-            for(index = 8; index > 0; index = index - 1) begin
+            for(index = 0; index < 8; index = index + 1) begin
 
                 data_in = send_data[index];
                 write_in = 1;
@@ -64,12 +64,6 @@ initial begin
             send_data = send_data + 1;
         end    
          #300000;
-         dequeue_in = 1; // ranca fora 1
-         #200000;
-         dequeue_in = 0; // desiste de rancar fora
-         #600000;
-
-           #300000;
          dequeue_in = 1; // ranca fora 1
          #200000;
          dequeue_in = 0; // desiste de rancar fora
