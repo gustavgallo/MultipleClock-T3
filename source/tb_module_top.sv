@@ -59,7 +59,7 @@ initial begin
             write_in = 0;
             #10000;
         end 
-         #100000;
+         #300000;
          dequeue_in = 1; // ranca fora 1
          #200000;
          dequeue_in = 0; // desiste de rancar fora
