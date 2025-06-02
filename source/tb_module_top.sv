@@ -34,8 +34,8 @@ module tb_module_top;
    end
 
 integer index;
-integer word;
-logic [7:0] send_data = 8'b10011001;
+
+logic [7:0] send_data;
 
 
 initial begin
@@ -48,27 +48,63 @@ initial begin
     reset = 0;
     #4000;
 
-    // Envia 4 palavras diferentes
-    for (word = 0; word < 4; word = word + 1) begin
-        send_data = 8'b00000000 + word; // Exemplo: incrementa a cada palavra
+    forever begin
 
-        @(posedge status);
+    // Palavra 1
+    send_data = 8'b10011001;
+    @(posedge status);
+    #10000;
+    for(index = 0; index < 8; index = index + 1) begin
+        data_in = send_data[index];
+        write_in = 1;
         #10000;
-        for(index = 0; index < 8; index = index + 1) begin
-            data_in = send_data[index];
-            write_in = 1;
-            #10000;
-            write_in = 0;
-            #10000;
-        end 
-        #300000;
-    end
+        write_in = 0;
+        #10000;
+    end 
 
-    dequeue_in = 1; // ranca fora 1
-    #200000;
-    dequeue_in = 0; // desiste de rancar fora
-    #600000;
-    $finish; // finaliza simulação
+    // Palavra 2
+    send_data = 8'b11110000;
+    @(posedge status);
+    #10000;
+    for(index = 0; index < 8; index = index + 1) begin
+        data_in = send_data[index];
+        write_in = 1;
+        #10000;
+        write_in = 0;
+        #10000;
+    end 
+
+    // Palavra 3
+    send_data = 8'b00001111;
+    @(posedge status);
+    #10000;
+    for(index = 0; index < 8; index = index + 1) begin
+        data_in = send_data[index];
+        write_in = 1;
+        #10000;
+        write_in = 0;
+        #10000;
+    end 
+
+    // Palavra 4
+    send_data = 8'b10101010;
+    @(posedge status);
+    #10000;
+    for(index = 0; index < 8; index = index + 1) begin
+        data_in = send_data[index];
+        write_in = 1;
+        #10000;
+        write_in = 0;
+        #10000;
+    end 
+
+         #300000;
+         dequeue_in = 1; // ranca fora 1
+         #200000;
+         dequeue_in = 0; // desiste de rancar fora
+         #600000;
+      $finish; // finaliza simulação
+    end
 end    
 
  endmodule
