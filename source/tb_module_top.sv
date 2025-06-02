@@ -34,8 +34,8 @@ module tb_module_top;
    end
 
 integer index;
-
-logic [7:0] send_data = 8'b10011001;
+integer words;
+logic [7:0] send_data = 8'b10000000;
 
 
 initial begin
@@ -51,14 +51,18 @@ initial begin
     forever begin
         @(posedge status);
         #10000;
-        for(index = 0; index < 8; index = index + 1) begin
+        for(words = 0; words < 4; words = words + 1)begin
+            for(index = 0; index < 8; index = index + 1) begin
 
-            data_in = send_data[index];
-            write_in = 1;
-            #10000;
-            write_in = 0;
-            #10000;
-        end 
+                data_in = send_data[index];
+                write_in = 1;
+                #10000;
+                write_in = 0;
+                #10000;
+            end 
+            #30000;
+            send_data = send_data + 1;
+        end    
          #300000;
          dequeue_in = 1; // ranca fora 1
          #200000;
