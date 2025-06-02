@@ -22,7 +22,7 @@ typedef enum logic [1:0] {
 } state_t;
 
 state_t EA;
-EA = EA_des;
+assign EA_des = EA;
 
 logic [2:0] counter; // contador para saber quantos bits foram recebidos
 logic start = 1;

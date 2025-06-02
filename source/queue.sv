@@ -24,7 +24,7 @@ typedef enum logic [1:0] {
 } state_t;
 
 state_t EA;
-EA_queue = EA;
+assign EA_queue = EA;
 
 //bloco de dados para tratar do enqueue e dequeue
 always_ff @(posedge clock_10KHZ, posedge reset)begin
