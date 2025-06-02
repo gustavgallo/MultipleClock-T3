@@ -35,6 +35,7 @@ module tb_module_top;
 
 integer index;
 integer words;
+integer dequeues_counter;
 logic [0:7] send_data = 8'b10000000;
 
 
@@ -51,7 +52,7 @@ initial begin
     forever begin
         @(posedge status);
         #10000;
-        for(words = 0; words < 4; words = words + 1)begin
+        for(words = 0; words < 8; words = words + 1)begin
             for(index = 0; index < 8; index = index + 1) begin
 
                 data_in = send_data[index];
@@ -63,30 +64,16 @@ initial begin
             #300000;
             send_data = send_data + 1;
         end    
-         #300000;
-         dequeue_in = 1; // ranca fora 1
-         #200000;
-         dequeue_in = 0; // desiste de rancar fora
-         #600000;
 
+        for(dequeues_counter = 0; dequeues_counter < 8; dequeues_counter = dequeues_counter + 1)begin
          #300000;
          dequeue_in = 1; // ranca fora 1
          #200000;
          dequeue_in = 0; // desiste de rancar fora
          #600000;
+        end
 
-         #300000;
-         dequeue_in = 1; // ranca fora 1
-         #200000;
-         dequeue_in = 0; // desiste de rancar fora
-         #600000;
 
-         #300000;
-         dequeue_in = 1; // ranca fora 1
-         #200000;
-         dequeue_in = 0; // desiste de rancar fora
-         #600000;
-         
       $finish; // finaliza simulação
     end
 end    
