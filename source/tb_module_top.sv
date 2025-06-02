@@ -35,7 +35,7 @@ module tb_module_top;
 
 integer index;
 integer words;
-logic [7:0] send_data = 8'b10000000;
+logic [0:7] send_data = 8'b10000000;
 
 
 initial begin
