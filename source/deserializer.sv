@@ -52,7 +52,7 @@ always_ff @(posedge clock_100KHZ, posedge reset)begin
                                 counter <= counter + 1;
                                 if (counter == 3'd8) begin // se recebeu todos os bits es5creve no data_ready
                                     data_ready <= 1;
-                                    status_out <= 0; // nao ta recebendo mais dados
+                                    status_out <= 1; // nao ta recebendo mais dados
 
                                 end
                             end

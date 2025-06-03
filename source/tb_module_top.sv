@@ -91,7 +91,7 @@ initial begin
             send_data = send_data + 1;
         end        
 
-
+        #200000;
 
       $finish; // finaliza simulação
     end
