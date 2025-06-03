@@ -74,9 +74,9 @@ initial begin
         end
 
         reset = 1;
-        #2500;
+        #100000;
         reset = 0;
-        #4000;
+        #10000;
 
     for(words = 0; words < 9; words = words + 1)begin
             for(index = 0; index < 8; index = index + 1) begin
