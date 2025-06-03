@@ -12,8 +12,7 @@ add wave -noupdate -label write_in /tb_module_top/write_in
 add wave -noupdate -label data_in /tb_module_top/data_in
 add wave -noupdate -label entrada_queue /tb_module_top/main/entrada_queue
 add wave -noupdate -label enable_queue /tb_module_top/main/enable_queue
-add wave -noupdate -label EA_des /tb_module_top/main/EA_des
-add wave -noupdate -label EA_queue /tb_module_top/main/EA_queue
+
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {6347200 ps} 0}
