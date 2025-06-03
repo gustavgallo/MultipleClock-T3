@@ -74,7 +74,7 @@ initial begin
         end
 
         reset = 1;
-        #100000;
+        #10000;
         reset = 0;
         #10000;
 
