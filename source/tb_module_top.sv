@@ -73,6 +73,25 @@ initial begin
          #600000;
         end
 
+        reset = 1;
+        #2500;
+        reset = 0;
+        #4000;
+
+    for(words = 0; words < 9; words = words + 1)begin
+            for(index = 0; index < 8; index = index + 1) begin
+
+                data_in = send_data[index];
+                write_in = 1;
+                #10000;
+                write_in = 0;
+                #10000;
+            end 
+            #300000;
+            send_data = send_data + 1;
+        end        
+
+
 
       $finish; // finaliza simulação
     end
