@@ -39,3 +39,9 @@ cd source
 vsim -do sim.do
 ```
 Certifique-se de que o arquivo sim.do está corretamente configurado para compilar os módulos e iniciar a simulação.
+
+## 🖥️ Simulação
+
+Segue em anexo a forma de onda resultante do testbench **[4]**, e seus respectivos valores:
+
+![Captura de tela de 2025-06-04 08-30-26](https://github.com/user-attachments/assets/8ab3f39a-3c7e-44ca-aca6-66402e568789)
