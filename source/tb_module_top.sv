@@ -70,7 +70,7 @@ initial begin
          dequeue_in = 1; // ranca fora 1
          #200000;
          dequeue_in = 0; // desiste de rancar fora
-         #600000;
+         #300000;
         end
 
         reset = 1;
