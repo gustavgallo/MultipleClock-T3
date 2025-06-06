@@ -1,47 +1,46 @@
 # 🕒 MultipleClock-T3
 
-## 👥 Autores
+📚 Available in: [English](README.md) | [Português](README.pt-BR.md)
+
+## 👥 Authors
 
 - Gustavo Gallo - [@gustavgallo](https://github.com/gustavgallo)  
 - Rodrigo Machado - [@GncRodrigo](https://github.com/GncRodrigo)
 
-## 📌 Descrição
+## 📌 Description
 
-Este projeto visa a implementação e simulação de um sistema digital com múltiplos domínios de relógio, utilizando a linguagem de descrição de hardware **SystemVerilog**. O objetivo é explorar técnicas de sincronização entre diferentes domínios de clock, um aspecto crucial em sistemas digitais complexos.
+This project aims to implement and simulate a digital system with multiple clock domains using the **SystemVerilog** hardware description language. The goal is to explore synchronization techniques between different clock domains — a crucial aspect in complex digital systems.
 
-## 🧩 Estrutura do Projeto
+## 🧩 Project Structure
 
-- **[1]** **deserializer**: recebe dados via `data_in`. Sempre que `write_in` estiver ativo, o bit é armazenado em `data_out` podendo formar um conjunto de 8 bits, trabalha com clock de `100KHz`.
-- **[2]** **queue**: armazena sequências de 8 bits em `data_out`, com capacidade para guardar até 4 entradas em `len_out`. Possui operações de **enqueue** (inserção) e **dequeue** (remoção), trabalha com clock de `10KHz`.
-- **[3]** **module_top**: conecta o `deserializer` à `queue`, enviando automaticamente `data_out` à fila quando o `data_out` do `deserializer` estiver completo, também gera os clocks para simulação e o sinal de **ack** utilizado no módulo **[1]**.
-- **[4]** **tb_module_top**: módulo de teste, armazena oito palavras na `queue`, depois retira uma por vez exibindo seu conteúdo em `data_out`, após isso será atualizado o sinal `reset`, mais 8 palavras serão enfileiradas na `queue`, e haverá uma tentativa de inserir mais uma palavra, demonstrando um travamento com status alto *(caso ruim)*.
-- **[5]** **Geração de Clocks**: dentro do `module_top`, existe um processo que gera clocks de `100KHz` e de `10KHz` derivados do clock de `1MHz` gerado no testbench `tb_module_top.sv`.
-  
-## 🛠️ Tecnologias Utilizadas
+- **[1]** **deserializer**: receives data via `data_in`. Whenever `write_in` is active, the bit is stored in `data_out`, forming 8-bit sequences. Operates with a `100KHz` clock.
+- **[2]** **queue**: stores 8-bit sequences in `data_out`, with capacity for up to 4 entries in `len_out`. Supports **enqueue** (insert) and **dequeue** (remove) operations, running at `10KHz`.
+- **[3]** **module_top**: connects the `deserializer` to the `queue`, automatically sending `data_out` to the queue when the deserializer output is complete. It also generates simulation clocks and the **ack** signal used in module **[1]**.
+- **[4]** **tb_module_top**: testbench module that stores eight words into the queue, then dequeues and displays them via `data_out`. Afterward, the `reset` signal is activated, another eight words are queued, and one more insertion is attempted — demonstrating a full queue condition (error case).
+- **[5]** **Clock Generation**: inside `module_top`, a process generates `100KHz` and `10KHz` clocks derived from the `1MHz` clock produced by the `tb_module_top.sv` testbench.
 
-- **Linguagem:** SystemVerilog  
-- **Simulação:** ModelSim, Questa ou qualquer simulador compatível com SystemVerilog.
+## 🛠️ Technologies Used
 
-## 🚀 Como Executar
+- **Language:** SystemVerilog  
+- **Simulation:** ModelSim, Questa, or any simulator compatible with SystemVerilog.
 
-Clone o repositório:
+## 🚀 How to Run
+
+Clone the repository:
 
 ```bash
 git clone https://github.com/gustavgallo/MultipleClock-T3.git
- ```
-Em seguida, execute a simulação com:
+```
+after that, run the simulation with:
 
 ```bash
 cd source
 ```
+Make sure the sim.do file is correctly configured to compile the modules and start the simulation.
+🖥️ Simulation
 
-```bash
-vsim -do sim.do
-```
-Certifique-se de que o arquivo sim.do está corretamente configurado para compilar os módulos e iniciar a simulação.
+Below is the waveform output from the [4] testbench, along with its corresponding values:
+![image](https://github.com/user-attachments/assets/910c7488-fac9-4774-b251-a50a17d9b491)
 
-## 🖥️ Simulação
 
-Segue em anexo a forma de onda resultante do testbench **[4]**, e seus respectivos valores:
-
-![Captura de tela de 2025-06-04 08-30-26](https://github.com/user-attachments/assets/8ab3f39a-3c7e-44ca-aca6-66402e568789)
+Screenshot from 2025-06-04 08-30-26
