@@ -41,6 +41,3 @@ Make sure the sim.do file is correctly configured to compile the modules and sta
 
 Below is the waveform output from the [4] testbench, along with its corresponding values:
 ![image](https://github.com/user-attachments/assets/910c7488-fac9-4774-b251-a50a17d9b491)
-
-
-Screenshot from 2025-06-04 08-30-26
