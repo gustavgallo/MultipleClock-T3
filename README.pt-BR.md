@@ -1,3 +1,6 @@
+
+📚 Disponível em: [English](README.md) | [Português](README.pt-BR.md)
+
 ## 👥 Autores
 
 - Gustavo Gallo - [@gustavgallo](https://github.com/gustavgallo)  
