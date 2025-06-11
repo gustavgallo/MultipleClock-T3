@@ -1,6 +1,6 @@
 # 🕒 MultipleClock-T3
 
-📚 Available in: [English](README.md) | [Português](README.pt-BR.md)
+📚 Available in: [English](README.md) | [Portuguese](README.pt-BR.md)
 
 ## 👥 Authors
 
